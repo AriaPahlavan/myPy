@@ -1,22 +1,31 @@
 import os
 
 
-# no_int_file_list = [x for x in file_list if not (x.isdigit()
-#                                                      or x[0] == '-' and x[1:].isdigit())]
-
-# is_integer = lambda s: not s.isdigit() or (s[0] == '-' and not s[1:].isdigit())
-#     no_int_file_list = filter(is_integer, file_list)
-
 def rename_file():
+    save_cur_path = os.getcwd()
     os.chdir(r"/home/aria/Desktop/prank")
     file_list = os.listdir("./")
-    new_list = []
 
     for oldName in file_list:
         new_name = "".join([cur_letter for cur_letter in oldName if not cur_letter.isdigit()])
         os.renames(oldName, new_name)
 
-    print new_list
+    os.chdir(save_cur_path)
+
+
+def rename_file_second_version():
+    save_cur_path = os.getcwd()
+    os.chdir(r"/home/aria/Desktop/prank2")
+    file_list = os.listdir("./")
+
+    for oldName in file_list:
+        print oldName
+        print oldName.translate(None, "0123456789")
+        print "-------------------------------------"
+        os.renames(oldName, oldName.translate(None, "0123456789"))
+
+    os.chdir(save_cur_path)
 
 
 rename_file()
+rename_file_second_version()
